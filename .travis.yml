@@ -1,2 +1,5 @@
-xcodebuild test -scheme SchemaApplication -sdk iphonesimulator -destination "name=iPhone SE"
-  
+ language: objective-c
+  osx_image: xcode9.1
+  script:
+- xcodebuild -scheme 'Then-iOS' -sdk iphonesimulator CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test | xcpretty -c
+- xcodebuild -scheme 'Then-OSX' test | xcpretty -c
