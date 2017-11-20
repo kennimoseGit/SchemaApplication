@@ -34,7 +34,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         
         if(usrnameTextfield.text != "" && passwordTextfield.text != ""){
             let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let newViewController = storyBoard.instantiateViewController(withIdentifier: "SchemeVC") as! SchemeVC
+            let newViewController = storyBoard.instantiateViewController(withIdentifier: "TourchAuthenticateViewController") as! TourchAuthenticateViewController
             self.present(newViewController, animated: true, completion: nil)
         }
         else{

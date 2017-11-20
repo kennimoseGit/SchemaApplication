@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		30EBDFBB1FC19A9F005763D2 /* SchemaApplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EBDFBA1FC19A9F005763D2 /* SchemaApplicationTests.swift */; };
 		30EBDFC91FC19AC2005763D2 /* SchemaApplicationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EBDFC81FC19AC2005763D2 /* SchemaApplicationUITests.swift */; };
+		B796E9A41FC31D22008363E4 /* TourchAuthenticateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B796E9A31FC31D22008363E4 /* TourchAuthenticateViewController.swift */; };
+		B796E9A61FC31E7F008363E4 /* SchemaCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B796E9A51FC31E7F008363E4 /* SchemaCollectionViewCell.swift */; };
 		B7B7425C1FB9DB9E0045B2DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B7425B1FB9DB9E0045B2DD /* AppDelegate.swift */; };
 		B7B7425E1FB9DB9E0045B2DD /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B7425D1FB9DB9E0045B2DD /* LoginVC.swift */; };
 		B7B742611FB9DB9E0045B2DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7B7425F1FB9DB9E0045B2DD /* Main.storyboard */; };
@@ -43,6 +45,8 @@
 		30EBDFC61FC19AC2005763D2 /* SchemaApplicationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchemaApplicationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		30EBDFC81FC19AC2005763D2 /* SchemaApplicationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemaApplicationUITests.swift; sourceTree = "<group>"; };
 		30EBDFCA1FC19AC2005763D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B796E9A31FC31D22008363E4 /* TourchAuthenticateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TourchAuthenticateViewController.swift; sourceTree = "<group>"; };
+		B796E9A51FC31E7F008363E4 /* SchemaCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchemaCollectionViewCell.swift; sourceTree = "<group>"; };
 		B7B742581FB9DB9E0045B2DD /* SchemaApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SchemaApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7B7425B1FB9DB9E0045B2DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7B7425D1FB9DB9E0045B2DD /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -98,6 +102,14 @@
 			path = SchemaApplicationUITests;
 			sourceTree = "<group>";
 		};
+		B796E9A71FC31E84008363E4 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B796E9A51FC31E7F008363E4 /* SchemaCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		B7B7424F1FB9DB9E0045B2DD = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +136,7 @@
 				B7B7425B1FB9DB9E0045B2DD /* AppDelegate.swift */,
 				B7D627131FBDC4FC005E65BA /* Utilities */,
 				B7D627121FBDC4F7005E65BA /* Controllers */,
+				B796E9A71FC31E84008363E4 /* Cells */,
 				B7B7425F1FB9DB9E0045B2DD /* Main.storyboard */,
 				B7B742621FB9DB9E0045B2DD /* Assets.xcassets */,
 				B7B742641FB9DB9E0045B2DD /* LaunchScreen.storyboard */,
@@ -136,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				B7B7425D1FB9DB9E0045B2DD /* LoginVC.swift */,
+				B796E9A31FC31D22008363E4 /* TourchAuthenticateViewController.swift */,
 				B7D627181FBDC948005E65BA /* SignUpVC.swift */,
 				B7D627161FBDC631005E65BA /* SchemeVC.swift */,
 			);
@@ -300,10 +314,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B796E9A41FC31D22008363E4 /* TourchAuthenticateViewController.swift in Sources */,
 				B7D627151FBDC50A005E65BA /* Utilities.swift in Sources */,
 				B7D627171FBDC631005E65BA /* SchemeVC.swift in Sources */,
 				B7B7425E1FB9DB9E0045B2DD /* LoginVC.swift in Sources */,
 				B7B7425C1FB9DB9E0045B2DD /* AppDelegate.swift in Sources */,
+				B796E9A61FC31E7F008363E4 /* SchemaCollectionViewCell.swift in Sources */,
 				B7D627191FBDC948005E65BA /* SignUpVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
