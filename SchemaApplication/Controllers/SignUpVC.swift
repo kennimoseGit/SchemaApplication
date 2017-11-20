@@ -4,7 +4,7 @@
 //
 //  Created by Kenni Mose on 16/11/2017.
 //  Copyright © 2017 kenni. All rights reserved.
-//  Commit
+//  
 
 import UIKit
 
