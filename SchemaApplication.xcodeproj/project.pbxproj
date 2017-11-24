@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		30D052461FC4C36F00367E1A /* Keys in Resources */ = {isa = PBXBuildFile; fileRef = 30D052451FC4C36F00367E1A /* Keys */; };
+		301E2CC61FC820380040260D /* SecretKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 301E2CC51FC820380040260D /* SecretKeys.plist */; };
 		30EBDFBB1FC19A9F005763D2 /* SchemaApplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EBDFBA1FC19A9F005763D2 /* SchemaApplicationTests.swift */; };
 		30EBDFC91FC19AC2005763D2 /* SchemaApplicationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EBDFC81FC19AC2005763D2 /* SchemaApplicationUITests.swift */; };
 		B796E9A41FC31D22008363E4 /* TourchAuthenticateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B796E9A31FC31D22008363E4 /* TourchAuthenticateViewController.swift */; };
@@ -40,7 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		30D052451FC4C36F00367E1A /* Keys */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Keys; sourceTree = SOURCE_ROOT; };
+		301E2CC51FC820380040260D /* SecretKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = SecretKeys.plist; sourceTree = "<group>"; };
 		30EBDFB81FC19A9F005763D2 /* SchemaApplicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchemaApplicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		30EBDFBA1FC19A9F005763D2 /* SchemaApplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemaApplicationTests.swift; sourceTree = "<group>"; };
 		30EBDFBC1FC19A9F005763D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -135,7 +135,7 @@
 		B7B7425A1FB9DB9E0045B2DD /* SchemaApplication */ = {
 			isa = PBXGroup;
 			children = (
-				30D052451FC4C36F00367E1A /* Keys */,
+				301E2CC51FC820380040260D /* SecretKeys.plist */,
 				B7B7425B1FB9DB9E0045B2DD /* AppDelegate.swift */,
 				B7D627131FBDC4FC005E65BA /* Utilities */,
 				B7D627121FBDC4F7005E65BA /* Controllers */,
@@ -288,7 +288,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30D052461FC4C36F00367E1A /* Keys in Resources */,
+				301E2CC61FC820380040260D /* SecretKeys.plist in Resources */,
 				B7B742661FB9DB9E0045B2DD /* LaunchScreen.storyboard in Resources */,
 				B7B742631FB9DB9E0045B2DD /* Assets.xcassets in Resources */,
 				B7B742611FB9DB9E0045B2DD /* Main.storyboard in Resources */,
