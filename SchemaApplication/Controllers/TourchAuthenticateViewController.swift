@@ -48,7 +48,11 @@ class TourchAuthenticateViewController: UIViewController {
                 }else {
                     DispatchQueue.main.async {
                         //Authentication failed. Show alert indicating what error occurred
-                        self.displayErrorMessage(error: error as! LAError )
+                        if #available(iOS 11.0, *) {
+                            self.displayErrorMessage(error: error as! LAError )
+                        } else {
+                            // Fallback on earlier versions
+                        }
                     }
                     
                 }
@@ -60,28 +64,33 @@ class TourchAuthenticateViewController: UIViewController {
     }
     
     
+    @available(iOS 11.0, *)
     func displayErrorMessage(error:LAError) {
         var message = ""
-        switch error.code {
-        case LAError.authenticationFailed:
-            message = "Authentication was not successful because the user failed to provide valid credentials."
-            break
-        case LAError.userCancel:
-            message = "Authentication was canceled by the user"
-            break
-        case LAError.userFallback:
-            message = "Authentication was canceled because the user tapped the fallback button"
-            break
-        case LAError.biometryNotEnrolled:
-            message = "Authentication could not start because Touch ID has no enrolled fingers."
-        case LAError.passcodeNotSet:
-            message = "Passcode is not set on the device."
-            break
-        case LAError.systemCancel:
-            message = "Authentication was canceled by system"
-            break
-        default:
-            message = error.localizedDescription
+        if #available(iOS 11.0, *) {
+            switch error.code {
+            case LAError.authenticationFailed:
+                message = "Authentication was not successful because the user failed to provide valid credentials."
+                break
+            case LAError.userCancel:
+                message = "Authentication was canceled by the user"
+                break
+            case LAError.userFallback:
+                message = "Authentication was canceled because the user tapped the fallback button"
+                break
+            case LAError.biometryNotEnrolled:
+                message = "Authentication could not start because Touch ID has no enrolled fingers."
+            case LAError.passcodeNotSet:
+                message = "Passcode is not set on the device."
+                break
+            case LAError.systemCancel:
+                message = "Authentication was canceled by system"
+                break
+            default:
+                message = error.localizedDescription
+            }
+        } else {
+            // Fallback on earlier versions
         }
         
         self.showAlertWith(title: "Authentication Failed", message: message)
