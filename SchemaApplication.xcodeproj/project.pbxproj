@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		301E2CC61FC820380040260D /* SecretKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 301E2CC51FC820380040260D /* SecretKeys.plist */; };
 		30EBDFBB1FC19A9F005763D2 /* SchemaApplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EBDFBA1FC19A9F005763D2 /* SchemaApplicationTests.swift */; };
 		30EBDFC91FC19AC2005763D2 /* SchemaApplicationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EBDFC81FC19AC2005763D2 /* SchemaApplicationUITests.swift */; };
+		B737675B1FC8221100ECAB54 /* SecretKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B737675A1FC8221100ECAB54 /* SecretKeys.plist */; };
 		B796E9A41FC31D22008363E4 /* TourchAuthenticateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B796E9A31FC31D22008363E4 /* TourchAuthenticateViewController.swift */; };
 		B796E9A61FC31E7F008363E4 /* SchemaCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B796E9A51FC31E7F008363E4 /* SchemaCollectionViewCell.swift */; };
 		B7B7425C1FB9DB9E0045B2DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B7425B1FB9DB9E0045B2DD /* AppDelegate.swift */; };
@@ -40,13 +40,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		301E2CC51FC820380040260D /* SecretKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = SecretKeys.plist; sourceTree = "<group>"; };
 		30EBDFB81FC19A9F005763D2 /* SchemaApplicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchemaApplicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		30EBDFBA1FC19A9F005763D2 /* SchemaApplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemaApplicationTests.swift; sourceTree = "<group>"; };
 		30EBDFBC1FC19A9F005763D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30EBDFC61FC19AC2005763D2 /* SchemaApplicationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchemaApplicationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		30EBDFC81FC19AC2005763D2 /* SchemaApplicationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemaApplicationUITests.swift; sourceTree = "<group>"; };
 		30EBDFCA1FC19AC2005763D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B737675A1FC8221100ECAB54 /* SecretKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = SecretKeys.plist; sourceTree = "<group>"; };
 		B796E9A31FC31D22008363E4 /* TourchAuthenticateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TourchAuthenticateViewController.swift; sourceTree = "<group>"; };
 		B796E9A51FC31E7F008363E4 /* SchemaCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchemaCollectionViewCell.swift; sourceTree = "<group>"; };
 		B7B742581FB9DB9E0045B2DD /* SchemaApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SchemaApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,7 +135,7 @@
 		B7B7425A1FB9DB9E0045B2DD /* SchemaApplication */ = {
 			isa = PBXGroup;
 			children = (
-				301E2CC51FC820380040260D /* SecretKeys.plist */,
+				B737675A1FC8221100ECAB54 /* SecretKeys.plist */,
 				B7B7425B1FB9DB9E0045B2DD /* AppDelegate.swift */,
 				B7D627131FBDC4FC005E65BA /* Utilities */,
 				B7D627121FBDC4F7005E65BA /* Controllers */,
@@ -288,7 +288,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				301E2CC61FC820380040260D /* SecretKeys.plist in Resources */,
+				B737675B1FC8221100ECAB54 /* SecretKeys.plist in Resources */,
 				B7B742661FB9DB9E0045B2DD /* LaunchScreen.storyboard in Resources */,
 				B7B742631FB9DB9E0045B2DD /* Assets.xcassets in Resources */,
 				B7B742611FB9DB9E0045B2DD /* Main.storyboard in Resources */,
@@ -539,6 +539,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4JLUJ8SU2K;
 				INFOPLIST_FILE = SchemaApplication/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kenni.SchemaApplication;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -554,6 +555,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4JLUJ8SU2K;
 				INFOPLIST_FILE = SchemaApplication/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kenni.SchemaApplication;
 				PRODUCT_NAME = "$(TARGET_NAME)";
