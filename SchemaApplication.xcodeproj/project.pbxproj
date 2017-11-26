@@ -10,6 +10,12 @@
 		30EBDFBB1FC19A9F005763D2 /* SchemaApplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EBDFBA1FC19A9F005763D2 /* SchemaApplicationTests.swift */; };
 		30EBDFC91FC19AC2005763D2 /* SchemaApplicationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EBDFC81FC19AC2005763D2 /* SchemaApplicationUITests.swift */; };
 		B737675B1FC8221100ECAB54 /* SecretKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B737675A1FC8221100ECAB54 /* SecretKeys.plist */; };
+		B737675D1FC83E1E00ECAB54 /* DBConnecter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737675C1FC83E1E00ECAB54 /* DBConnecter.swift */; };
+		B737675F1FC8662200ECAB54 /* ChooseDepartmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737675E1FC8662200ECAB54 /* ChooseDepartmentViewController.swift */; };
+		B73767611FC8668D00ECAB54 /* ChooseCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73767601FC8668D00ECAB54 /* ChooseCoursesViewController.swift */; };
+		B73767631FC867E200ECAB54 /* DepartmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73767621FC867E200ECAB54 /* DepartmentTableViewCell.swift */; };
+		B73767651FC867F900ECAB54 /* CoursesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73767641FC867F900ECAB54 /* CoursesTableViewCell.swift */; };
+		B73767671FCB18D100ECAB54 /* ALLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73767661FCB18D100ECAB54 /* ALLoadingView.swift */; };
 		B796E9A41FC31D22008363E4 /* TourchAuthenticateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B796E9A31FC31D22008363E4 /* TourchAuthenticateViewController.swift */; };
 		B796E9A61FC31E7F008363E4 /* SchemaCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B796E9A51FC31E7F008363E4 /* SchemaCollectionViewCell.swift */; };
 		B7B7425C1FB9DB9E0045B2DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B7425B1FB9DB9E0045B2DD /* AppDelegate.swift */; };
@@ -47,6 +53,12 @@
 		30EBDFC81FC19AC2005763D2 /* SchemaApplicationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemaApplicationUITests.swift; sourceTree = "<group>"; };
 		30EBDFCA1FC19AC2005763D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B737675A1FC8221100ECAB54 /* SecretKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = SecretKeys.plist; sourceTree = "<group>"; };
+		B737675C1FC83E1E00ECAB54 /* DBConnecter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBConnecter.swift; sourceTree = "<group>"; };
+		B737675E1FC8662200ECAB54 /* ChooseDepartmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseDepartmentViewController.swift; sourceTree = "<group>"; };
+		B73767601FC8668D00ECAB54 /* ChooseCoursesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCoursesViewController.swift; sourceTree = "<group>"; };
+		B73767621FC867E200ECAB54 /* DepartmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentTableViewCell.swift; sourceTree = "<group>"; };
+		B73767641FC867F900ECAB54 /* CoursesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesTableViewCell.swift; sourceTree = "<group>"; };
+		B73767661FCB18D100ECAB54 /* ALLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALLoadingView.swift; sourceTree = "<group>"; };
 		B796E9A31FC31D22008363E4 /* TourchAuthenticateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TourchAuthenticateViewController.swift; sourceTree = "<group>"; };
 		B796E9A51FC31E7F008363E4 /* SchemaCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchemaCollectionViewCell.swift; sourceTree = "<group>"; };
 		B7B742581FB9DB9E0045B2DD /* SchemaApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SchemaApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +120,8 @@
 			isa = PBXGroup;
 			children = (
 				B796E9A51FC31E7F008363E4 /* SchemaCollectionViewCell.swift */,
+				B73767621FC867E200ECAB54 /* DepartmentTableViewCell.swift */,
+				B73767641FC867F900ECAB54 /* CoursesTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -153,8 +167,10 @@
 			children = (
 				B7B7425D1FB9DB9E0045B2DD /* LoginVC.swift */,
 				B796E9A31FC31D22008363E4 /* TourchAuthenticateViewController.swift */,
-				B7D627181FBDC948005E65BA /* SignUpVC.swift */,
 				B7D627161FBDC631005E65BA /* SchemeVC.swift */,
+				B7D627181FBDC948005E65BA /* SignUpVC.swift */,
+				B737675E1FC8662200ECAB54 /* ChooseDepartmentViewController.swift */,
+				B73767601FC8668D00ECAB54 /* ChooseCoursesViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -163,6 +179,8 @@
 			isa = PBXGroup;
 			children = (
 				B7D627141FBDC50A005E65BA /* Utilities.swift */,
+				B737675C1FC83E1E00ECAB54 /* DBConnecter.swift */,
+				B73767661FCB18D100ECAB54 /* ALLoadingView.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -318,12 +336,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B73767651FC867F900ECAB54 /* CoursesTableViewCell.swift in Sources */,
 				B796E9A41FC31D22008363E4 /* TourchAuthenticateViewController.swift in Sources */,
 				B7D627151FBDC50A005E65BA /* Utilities.swift in Sources */,
+				B737675F1FC8662200ECAB54 /* ChooseDepartmentViewController.swift in Sources */,
 				B7D627171FBDC631005E65BA /* SchemeVC.swift in Sources */,
+				B737675D1FC83E1E00ECAB54 /* DBConnecter.swift in Sources */,
 				B7B7425E1FB9DB9E0045B2DD /* LoginVC.swift in Sources */,
+				B73767671FCB18D100ECAB54 /* ALLoadingView.swift in Sources */,
 				B7B7425C1FB9DB9E0045B2DD /* AppDelegate.swift in Sources */,
 				B796E9A61FC31E7F008363E4 /* SchemaCollectionViewCell.swift in Sources */,
+				B73767631FC867E200ECAB54 /* DepartmentTableViewCell.swift in Sources */,
+				B73767611FC8668D00ECAB54 /* ChooseCoursesViewController.swift in Sources */,
 				B7D627191FBDC948005E65BA /* SignUpVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

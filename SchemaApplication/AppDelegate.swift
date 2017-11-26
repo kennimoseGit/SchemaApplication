@@ -12,11 +12,12 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-    // testdasd
+    var dbConnector = DBConnecter()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // populate variables in dbconnector with values from file when app launches, so they are ready to use.
+        dbConnector.getKeysFromPlist()
         return true
     }
 

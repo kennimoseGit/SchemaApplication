@@ -15,16 +15,21 @@ class SignUpVC: UIViewController {
     @IBOutlet weak var mailTextfield: UITextField!
     @IBOutlet weak var phoneTextfield: UITextField!
     
-    let studentObject:NSMutableDictionary = NSMutableDictionary()
+    @IBOutlet weak var okButton: UIButton!
+    var studentObject:NSMutableDictionary = NSMutableDictionary()
     
     var invalidInput = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        okButton.layer.cornerRadius = 20
+        
         usernameTextfield.delegate = self
         passwordTextfield.delegate = self
         mailTextfield.delegate = self
+        
+        hideKeyboardWhenTappedAround()
     }
     
     @IBAction func okAction(_ sender: Any) {
@@ -43,12 +48,18 @@ class SignUpVC: UIViewController {
         //Check if the the input is ok
         if invalidInput == false{
             //Create the JSON object
-            studentObject.setValue(usernameTextfield.text!, forKey: "username")
+            studentObject.setValue(usernameTextfield.text!, forKey: "name")
             studentObject.setValue(passwordTextfield.text!, forKey: "password")
-            studentObject.setValue(mailTextfield.text!, forKey: "mail")
+            studentObject.setValue(mailTextfield.text!, forKey: "email")
             studentObject.setValue(phoneTextfield.text!, forKey: "phone")
             
-            //TODO safe in database
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyBoard.instantiateViewController(withIdentifier: "ChooseDepartmentViewController") as! ChooseDepartmentViewController
+            
+            vc.studentObject = self.studentObject
+            
+            self.present(vc, animated: true, completion: nil)
+            
         }
     }
     
@@ -67,15 +78,9 @@ class SignUpVC: UIViewController {
     
     //Go back
     @IBAction func backAction(_ sender: Any) {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let loginViewController = storyBoard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
-        self.present(loginViewController, animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 }
 
 extension SignUpVC : UITextFieldDelegate {
