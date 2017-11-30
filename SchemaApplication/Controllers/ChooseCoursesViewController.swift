@@ -8,12 +8,14 @@
 
 import UIKit
 
+var arrayOfSelectedCourses = [Int]()
+
 class ChooseCoursesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var collectionview: UITableView!
     @IBOutlet weak var okButton: UIButton!
     
-    let arrayOfCourses:[String] = ["HCI", "Testing", "Database", "Crytographi"]
+    var arrayOfCourses = NSArray()
     
     var studentObject:NSMutableDictionary = NSMutableDictionary()
     
@@ -24,6 +26,63 @@ class ChooseCoursesViewController: UIViewController, UITableViewDataSource, UITa
 
         self.collectionview.tableFooterView = UIView()
         okButton.layer.cornerRadius = 20
+        
+        self.getCoursesFromDepartment()
+    }
+    
+    func getCoursesFromDepartment(){
+        
+        ALLoadingView.manager.showLoadingView(ofType: .basic)
+        
+        var token:String?
+        
+        if(defaults.object(forKey: "token") == nil){
+            
+            token = "dummytoken"
+        }
+        else {
+            token = defaults.object(forKey: "token") as? String
+        }
+        
+        let departmentId = defaults.object(forKey: "departmentId") as? Int
+        
+        dbConnector.getCourses(token: token!, departmentId: departmentId!) { (result, array) in
+            
+            if(result == 401){
+            
+                self.dbConnector.createToken(completion: { (token) in
+                    
+                    self.dbConnector.getCourses(token: token, departmentId: departmentId!, completion: { (result, array) in
+                        
+                        if(result != 200){
+                            ALLoadingView.manager.hideLoadingView()
+                            self.showAlertWith(title: "Error", message: "An error happened trying to fetch Courses")
+                        }
+                        else{
+                            self.arrayOfCourses = array
+                            ALLoadingView.manager.hideLoadingView()
+                            DispatchQueue.main.async {
+                                self.collectionview.reloadData()
+                            }
+                        }
+                    })
+                })
+            }
+            else{
+                
+                if(result != 200){
+                    ALLoadingView.manager.hideLoadingView()
+                    self.showAlertWith(title: "Error", message: "An error happened trying to fetch Courses")
+                }
+                else{
+                    self.arrayOfCourses = array
+                    ALLoadingView.manager.hideLoadingView()
+                    DispatchQueue.main.async {
+                        self.collectionview.reloadData()
+                    }
+                }
+            }
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -34,7 +93,9 @@ class ChooseCoursesViewController: UIViewController, UITableViewDataSource, UITa
         
         let cell = collectionview.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CoursesTableViewCell
         
-        cell.coursesName.text = arrayOfCourses[indexPath.row]
+        let name: String? = (arrayOfCourses[indexPath.row] as AnyObject).value(forKey: "name") as? String
+        
+        cell.coursesName.text = name
         
         cell.preservesSuperviewLayoutMargins = false
         cell.separatorInset = UIEdgeInsets.zero
@@ -45,6 +106,11 @@ class ChooseCoursesViewController: UIViewController, UITableViewDataSource, UITa
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+         var courseId: Int? = (arrayOfCourses[indexPath.row] as AnyObject).value(forKey: "id") as? Int
+    
+        arrayOfSelectedCourses.append(courseId!)
+        
         if let cell = collectionview.cellForRow(at: indexPath) as? CoursesTableViewCell {
             cell.didSelect(indexPath: indexPath as NSIndexPath)
         }
@@ -65,29 +131,35 @@ class ChooseCoursesViewController: UIViewController, UITableViewDataSource, UITa
             token = "dummytoken"
         }
         else {
-            token = defaults.object(forKey: "token") as! String
+            token = defaults.object(forKey: "token") as? String
         }
         
-        dbConnector.createUser(token: token!, studentObject: studentObject) { (result) in
+        dbConnector.createUser(token: token!, studentObject: studentObject) { (result, id) in
             
             if(result == 401){
                 self.dbConnector.createToken(completion: { (token) in
                     
-                    self.dbConnector.createUser(token: token, studentObject: self.studentObject, completion: { (result) in
+                    self.dbConnector.createUser(token: token, studentObject: self.studentObject, completion: { (result, id) in
                         
                         if(result != 200){
                             
                             ALLoadingView.manager.hideLoadingView()
                             
-                            self.showAlertWith(title: "Error", message: "An error happened trying to create user")
+                            self.showAlertWith(title: "Error", message: "An error happened")
                         }
                         else{
                             
-                            ALLoadingView.manager.hideLoadingView()
-                            
-                            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                            let loginViewController = storyBoard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
-                            self.present(loginViewController, animated: true, completion: nil)
+                            self.postCourseToStudent(studentIdParam: id, completion: { (result) in
+                                
+                                if(result == false){
+                                    // if error
+                                }
+                                else{
+                                    let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                                    let loginViewController = storyBoard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+                                    self.present(loginViewController, animated: true, completion: nil)
+                                }
+                            })
                         }
                         
                     })
@@ -98,17 +170,80 @@ class ChooseCoursesViewController: UIViewController, UITableViewDataSource, UITa
                     
                     ALLoadingView.manager.hideLoadingView()
                     
-                    self.showAlertWith(title: "Error", message: "An error happened trying to create user")
+                    self.showAlertWith(title: "Error", message: "An error happened")
                 }
                 else{
                     
                     ALLoadingView.manager.hideLoadingView()
                     
-                    let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    let loginViewController = storyBoard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
-                    self.present(loginViewController, animated: true, completion: nil)
+                    self.postCourseToStudent(studentIdParam: id, completion: { (result) in
+                        
+                        if(result == false){
+                            // if error
+                        }
+                        else{
+                            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                            let loginViewController = storyBoard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+                            self.present(loginViewController, animated: true, completion: nil)
+                        }
+                    })
                 }
             }
         }
     }
+    
+    func postCourseToStudent(studentIdParam:Int, completion: @escaping (_ result:Bool) -> Void){
+        
+        var token:String?
+        
+        if(defaults.object(forKey: "token") == nil){
+            
+            token = "dummytoken"
+        }
+        else {
+            token = defaults.object(forKey: "token") as? String
+        }
+        
+        let studentId = studentIdParam
+
+        for course in arrayOfSelectedCourses {
+            
+            dbConnector.postCourseToStudent(token: token!, studentId: studentId, courseId: course, completion: { (result) in
+                
+                if(result == 401){
+                    
+                    self.dbConnector.createToken(completion: { (token) in
+                        
+                        self.dbConnector.postCourseToStudent(token: token, studentId: studentId, courseId: course, completion: { (result) in
+                            
+                            if(result != 200){
+                                self.showAlertWith(title: "Error", message: "An error happened trying to create user courses")
+                                completion(false)
+                                return
+                            }
+                            else{
+                                // do nothing
+                            }
+                        })
+                        
+                    })
+                    
+                }
+                else{
+                    if(result != 200){
+                        self.showAlertWith(title: "Error", message: "An error happened trying to create user courses")
+                        completion(false)
+                        return
+                    }
+                    else{
+                        // do nothing
+                    }
+                }
+            })
+        }
+        
+        completion(true)
+        
+    }
+    
 }

@@ -12,23 +12,76 @@ class ChooseDepartmentViewController: UIViewController, UITableViewDataSource, U
     
     @IBOutlet weak var collectionview: UITableView!
     
-    let arrayOfDepartments:[String] = ["Kea Guldbergsgade", "Kea Lygten 16", "Kea Jagtvej", "Kea Lygten 37"]
+    var arrayOfDepartments = NSArray()
     
     var studentObject:NSMutableDictionary = NSMutableDictionary()
 
+    let dbconnector = DBConnecter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.collectionview.tableFooterView = UIView()
 
-        // Do any additional setup after loading the view.
+        getDepartmentsFromDBConnector()
+        
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         collectionview.isUserInteractionEnabled = true
     }
+    
+    func getDepartmentsFromDBConnector(){
+        
+        ALLoadingView.manager.showLoadingView(ofType: .basic)
+        
+        var token:String?
+        
+        if(defaults.object(forKey: "token") == nil){
+            
+            token = "dummytoken"
+        }
+        else {
+            token = defaults.object(forKey: "token") as? String
+        }
+        
+   
+        dbconnector.getDepartments(token: token!) { (result, departments) in
+            
+            if(result == 401){
+                
+                self.dbconnector.createToken(completion: { (token) in
+                    
+                    self.dbconnector.getDepartments(token: token, completion: { (result, departments) in
+                        
+                        if(result != 200){
+                            ALLoadingView.manager.hideLoadingView()
+                            self.showAlertWith(title: "Error", message: "An error happened trying to fetch departments")
+                        }
+                        else{
+                            self.arrayOfDepartments = departments
+                            ALLoadingView.manager.hideLoadingView()
+                            self.collectionview.reloadData()
+                        }
+                    })
+                    
+                })
+            }
+            else{
+                if(result != 200){
+                    ALLoadingView.manager.hideLoadingView()
+                    self.showAlertWith(title: "Error", message: "An error happened trying to fetch departments")
+                }
+                else{
+                    self.arrayOfDepartments = departments
+                    ALLoadingView.manager.hideLoadingView()
+                    self.collectionview.reloadData()
+                }
+            }
+        }
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrayOfDepartments.count
@@ -38,7 +91,9 @@ class ChooseDepartmentViewController: UIViewController, UITableViewDataSource, U
         
         let cell = collectionview.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! DepartmentTableViewCell
         
-        cell.departmentName.text = arrayOfDepartments[indexPath.row]
+        var name: String? = (arrayOfDepartments[indexPath.row] as AnyObject).value(forKey: "name") as? String
+
+        cell.departmentName.text = name
         
         cell.preservesSuperviewLayoutMargins = false
         cell.separatorInset = UIEdgeInsets.zero
@@ -56,6 +111,10 @@ class ChooseDepartmentViewController: UIViewController, UITableViewDataSource, U
             
             collectionview.isUserInteractionEnabled = false
             
+            var departmentId: Int? = (arrayOfDepartments[indexPath.row] as AnyObject).value(forKey: "id") as? Int
+            
+            defaults.set(departmentId, forKey: "departmentId")
+
             let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
             DispatchQueue.main.asyncAfter(deadline: when) {
                 let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -79,5 +138,7 @@ class ChooseDepartmentViewController: UIViewController, UITableViewDataSource, U
         self.dismiss(animated: true, completion: nil)
         
     }
+    
+    
     
 }

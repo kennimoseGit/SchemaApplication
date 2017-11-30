@@ -145,17 +145,130 @@ class DBConnecter: NSObject, URLSessionDelegate {
     
     
     // get departments
-    func getDepartments(){
+    func getDepartments(token:String, completion: @escaping (_ status:Int, _ arrayOfDepartments:NSArray) -> Void){
+        
+        var arrayOfDepartments = NSArray()
+        
+        let url:URL = URL(string: "https://scheduleapplication.herokuapp.com/departments")!
+
+        let urlconfig = URLSessionConfiguration.default
+        urlconfig.timeoutIntervalForRequest = 20
+        urlconfig.timeoutIntervalForResource = 20
+        
+        let session = Foundation.URLSession(configuration: urlconfig, delegate: self, delegateQueue: OperationQueue.main)
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.addValue(token, forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let task = session.dataTask(with: request as URLRequest) {
+            (data, response, error) in
+            
+            if(response?.getStatusCode() == 401){
+                completion(401, arrayOfDepartments)
+                return
+            }
+            
+            if(error != nil){
+                completion(400, arrayOfDepartments)
+                return
+            }
+                
+            if(response?.getStatusCode() == 500){
+                completion(500, arrayOfDepartments)
+                return
+            }
+                
+            else{
+                
+                guard let data = data, let _:URLResponse = response, error == nil else {
+                    print("error")
+                    completion(400, arrayOfDepartments)
+                    return
+                }
+                
+                do{
+                    let jsonData = (try JSONSerialization.jsonObject(with: data, options:JSONSerialization.ReadingOptions.mutableContainers) as? NSArray)
+                                        
+                    arrayOfDepartments = jsonData!
+                    completion(200, arrayOfDepartments)
+
+                }
+                catch _ as NSError {
+                    // An error occurred while trying to convert the data into a Swift dictionary.
+                    print("an error occured")
+                }
+            }
+        }
+        task.resume()
         
     }
     
     // get courses from specific department
-    func getCourses(){
+    func getCourses(token:String, departmentId:Int, completion: @escaping (_ status:Int, _ arrayOfCourses:NSArray) -> Void){
+       
+        var arrayOfCourses = NSArray()
+
+        let url:URL = URL(string: "https://scheduleapplication.herokuapp.com/courses/\(departmentId)")!
         
+        let urlconfig = URLSessionConfiguration.default
+        urlconfig.timeoutIntervalForRequest = 20
+        urlconfig.timeoutIntervalForResource = 20
+        
+        let session = Foundation.URLSession(configuration: urlconfig, delegate: self, delegateQueue: OperationQueue.main)
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.addValue(token, forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let task = session.dataTask(with: request as URLRequest) {
+            (data, response, error) in
+            
+            if(response?.getStatusCode() == 401){
+                completion(401, arrayOfCourses)
+                return
+            }
+            
+            if(error != nil){
+                completion(400, arrayOfCourses)
+                return
+            }
+            
+            if(response?.getStatusCode() == 500){
+                completion(500, arrayOfCourses)
+                return
+            }
+                
+            else{
+                
+                guard let data = data, let _:URLResponse = response, error == nil else {
+                    print("error")
+                    completion(400, arrayOfCourses)
+                    return
+                }
+                
+                do{
+                    let jsonData = (try JSONSerialization.jsonObject(with: data, options:JSONSerialization.ReadingOptions.mutableContainers) as? NSArray)
+                    
+                    arrayOfCourses = jsonData!
+                    completion(200, arrayOfCourses)
+                    
+                }
+                catch _ as NSError {
+                    // An error occurred while trying to convert the data into a Swift dictionary.
+                    print("an error occured")
+                }
+            }
+        }
+        task.resume()
     }
     
     // create a user in database
-    func createUser(token:String, studentObject:NSMutableDictionary, completion: @escaping (_ status:Int) -> Void){
+    func createUser(token:String, studentObject:NSMutableDictionary, completion: @escaping (_ status:Int, _ studentId:Int) -> Void){
+        
+        var studentId:Int = 0
         
         let url:URL = URL(string: "https://scheduleapplication.herokuapp.com/student/create")!
 
@@ -181,6 +294,72 @@ class DBConnecter: NSObject, URLSessionDelegate {
             (data, response, error) in
             
             if(response?.getStatusCode() == 401){
+                completion(401, studentId)
+                return
+            }
+            
+            if(error != nil){
+                completion(400, studentId)
+                return
+            }
+                
+            if(response?.getStatusCode() == 500){
+                completion(500, studentId)
+                return
+            }
+                
+            else{
+                
+                guard let data = data, let _:URLResponse = response, error == nil else {
+                    print("error")
+                    completion(400, studentId)
+                    return
+                }
+                
+                do{
+                    let jsonData = (try JSONSerialization.jsonObject(with: data, options:JSONSerialization.ReadingOptions.mutableContainers) as? [String : AnyObject])!
+
+                    let id:Int = jsonData["student_id"] as! Int
+
+                    completion(200, id)
+                }
+                catch _ as NSError {
+                    // An error occurred while trying to convert the data into a Swift dictionary.
+                    print("an error occured")
+                }
+           
+            }
+        }
+        task.resume()
+        
+    }
+    
+    
+    func postCourseToStudent(token:String, studentId:Int, courseId:Int, completion: @escaping (_ status:Int) -> Void){
+        
+        let url:URL = URL(string: "https://scheduleapplication.herokuapp.com/course")!
+
+        let urlconfig = URLSessionConfiguration.default
+        urlconfig.timeoutIntervalForRequest = 20
+        urlconfig.timeoutIntervalForResource = 20
+        
+        let session = Foundation.URLSession(configuration: urlconfig, delegate: self, delegateQueue: OperationQueue.main)
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue(token, forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // prepare json data
+        let json: [String: Int] = ["student_id":studentId,
+                                      "course_id":courseId]
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        request.httpBody = jsonData
+        
+        let task = session.dataTask(with: request as URLRequest) {
+            (data, response, error) in
+            
+            if(response?.getStatusCode() == 401){
                 completion(401)
                 return
             }
@@ -189,6 +368,12 @@ class DBConnecter: NSObject, URLSessionDelegate {
                 completion(400)
                 return
             }
+            
+            if(response?.getStatusCode() == 500){
+                completion(500)
+                return
+            }
+                
             else{
                 
                 guard let data = data, let _:URLResponse = response, error == nil else {
@@ -200,12 +385,15 @@ class DBConnecter: NSObject, URLSessionDelegate {
                 do{
                     completion(200)
                 }
-           
+                
             }
         }
         task.resume()
         
     }
+    
+    
+    
     
     // get scheme for specific user
     func getScheme(){
