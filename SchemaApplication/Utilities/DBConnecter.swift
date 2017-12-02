@@ -252,6 +252,8 @@ class DBConnecter: NSObject, URLSessionDelegate {
                 do{
                     let jsonData = (try JSONSerialization.jsonObject(with: data, options:JSONSerialization.ReadingOptions.mutableContainers) as? NSArray)
                     
+                    print(jsonData)
+                    
                     arrayOfCourses = jsonData!
                     completion(200, arrayOfCourses)
                     
@@ -396,7 +398,65 @@ class DBConnecter: NSObject, URLSessionDelegate {
     
     
     // get scheme for specific user
-    func getScheme(){
+    func getScheme(token:String, studentId:Int, completion: @escaping (_ status:Int, _ arrayOfSchedules:NSArray) -> Void){
+        
+        var arrayOfSchedules = NSArray()
+        
+        let url:URL = URL(string: "https://scheduleapplication.herokuapp.com/schedule/\(studentId)")!
+
+        let urlconfig = URLSessionConfiguration.default
+        urlconfig.timeoutIntervalForRequest = 20
+        urlconfig.timeoutIntervalForResource = 20
+        
+        let session = Foundation.URLSession(configuration: urlconfig, delegate: self, delegateQueue: OperationQueue.main)
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.addValue(token, forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let task = session.dataTask(with: request as URLRequest) {
+            (data, response, error) in
+            
+            if(response?.getStatusCode() == 401){
+                completion(401, arrayOfSchedules)
+                return
+            }
+            
+            if(error != nil){
+                completion(400, arrayOfSchedules)
+                return
+            }
+            
+            if(response?.getStatusCode() == 500){
+                completion(500, arrayOfSchedules)
+                return
+            }
+                
+            else{
+                
+                guard let data = data, let _:URLResponse = response, error == nil else {
+                    print("error")
+                    completion(400, arrayOfSchedules)
+                    return
+                }
+                
+                do{
+                        let jsonData = (try JSONSerialization.jsonObject(with: data, options:JSONSerialization.ReadingOptions.mutableContainers) as? NSArray)
+                    
+                    print(jsonData)
+                    arrayOfSchedules = jsonData!
+                    completion(200, arrayOfSchedules)
+                }
+                catch _ as NSError {
+                    // An error occurred while trying to convert the data into a Swift dictionary.
+                    print("an error occured")
+                }
+                
+            }
+        }
+        task.resume()
+        
         
     }
     

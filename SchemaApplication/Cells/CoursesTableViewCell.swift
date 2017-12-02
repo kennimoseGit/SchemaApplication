@@ -13,6 +13,7 @@ class CoursesTableViewCell: UITableViewCell {
     @IBOutlet weak var coursesName: UILabel!
     @IBOutlet weak var isChoosenImageview: UIImageView!
     
+    @IBOutlet weak var semesterLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

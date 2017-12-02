@@ -14,11 +14,14 @@ class SchemaCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var secondTextLabel: UILabel!
     @IBOutlet weak var thirdTextLabel: UILabel!
     
+    @IBOutlet weak var classroom: UILabel!
+    @IBOutlet weak var weekday: UILabel!
+    @IBOutlet weak var type: UILabel!
+    @IBOutlet weak var ects: UILabel!
+    
+    
     override func awakeFromNib() {
-        
-        self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.white.cgColor
-        
+
     }
     
 }
