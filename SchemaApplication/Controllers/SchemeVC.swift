@@ -159,7 +159,7 @@ class SchemeVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
         layout.minimumLineSpacing = 5
         layout.invalidateLayout()
         
-        return CGSize(width: (self.view.frame.width), height: (self.view.frame.width)/2)
+        return CGSize(width: (self.view.frame.width), height: (self.view.frame.width)/2 + (50))
     }
     
     @objc func backButtonPressed() {
