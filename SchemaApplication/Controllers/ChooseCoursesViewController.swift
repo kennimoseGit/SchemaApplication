@@ -94,8 +94,10 @@ class ChooseCoursesViewController: UIViewController, UITableViewDataSource, UITa
         let cell = collectionview.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CoursesTableViewCell
         
         let name: String? = (arrayOfCourses[indexPath.row] as AnyObject).value(forKey: "name") as? String
+        let semester: String? = (arrayOfCourses[indexPath.row] as AnyObject).value(forKey: "semester") as? String
         
         cell.coursesName.text = name
+        cell.semesterLabel.text = semester
         
         cell.preservesSuperviewLayoutMargins = false
         cell.separatorInset = UIEdgeInsets.zero
@@ -205,6 +207,7 @@ class ChooseCoursesViewController: UIViewController, UITableViewDataSource, UITa
         }
         
         let studentId = studentIdParam
+        defaults.set(studentId, forKey: "studentId")
 
         for course in arrayOfSelectedCourses {
             

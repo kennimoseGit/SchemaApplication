@@ -112,6 +112,7 @@ class ChooseDepartmentViewController: UIViewController, UITableViewDataSource, U
             collectionview.isUserInteractionEnabled = false
             
             var departmentId: Int? = (arrayOfDepartments[indexPath.row] as AnyObject).value(forKey: "id") as? Int
+          
             
             defaults.set(departmentId, forKey: "departmentId")
 

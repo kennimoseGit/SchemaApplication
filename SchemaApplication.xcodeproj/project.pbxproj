@@ -116,6 +116,13 @@
 			path = SchemaApplicationUITests;
 			sourceTree = "<group>";
 		};
+		B72199BB1FD15BA1008BA0A8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		B796E9A71FC31E84008363E4 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +161,7 @@
 				B7D627131FBDC4FC005E65BA /* Utilities */,
 				B7D627121FBDC4F7005E65BA /* Controllers */,
 				B796E9A71FC31E84008363E4 /* Cells */,
+				B72199BB1FD15BA1008BA0A8 /* Model */,
 				B7B7425F1FB9DB9E0045B2DD /* Main.storyboard */,
 				B7B742621FB9DB9E0045B2DD /* Assets.xcassets */,
 				B7B742641FB9DB9E0045B2DD /* LaunchScreen.storyboard */,
