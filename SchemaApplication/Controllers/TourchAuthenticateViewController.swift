@@ -67,31 +67,28 @@ class TourchAuthenticateViewController: UIViewController {
     @available(iOS 11.0, *)
     func displayErrorMessage(error:LAError) {
         var message = ""
-        if #available(iOS 11.0, *) {
-            switch error.code {
-            case LAError.authenticationFailed:
-                message = "Authentication was not successful because the user failed to provide valid credentials."
-                break
-            case LAError.userCancel:
-                message = "Authentication was canceled by the user"
-                break
-            case LAError.userFallback:
-                message = "Authentication was canceled because the user tapped the fallback button"
-                break
-            case LAError.biometryNotEnrolled:
-                message = "Authentication could not start because Touch ID has no enrolled fingers."
-            case LAError.passcodeNotSet:
-                message = "Passcode is not set on the device."
-                break
-            case LAError.systemCancel:
-                message = "Authentication was canceled by system"
-                break
-            default:
-                message = error.localizedDescription
-            }
-        } else {
-            // Fallback on earlier versions
+        switch error.code {
+        case LAError.authenticationFailed:
+            message = "Authentication was not successful because the user failed to provide valid credentials."
+            break
+        case LAError.userCancel:
+            message = "Authentication was canceled by the user"
+            break
+        case LAError.userFallback:
+            message = "Authentication was canceled because the user tapped the fallback button"
+            break
+        case LAError.biometryNotEnrolled:
+            message = "Authentication could not start because Touch ID has no enrolled fingers."
+        case LAError.passcodeNotSet:
+            message = "Passcode is not set on the device."
+            break
+        case LAError.systemCancel:
+            message = "Authentication was canceled by system"
+            break
+        default:
+            message = error.localizedDescription
         }
+        
         
         self.showAlertWith(title: "Authentication Failed", message: message)
     }

@@ -36,7 +36,7 @@ class SchemaApplicationUITests: XCTestCase {
     func testSignInViewController(){
         app.launch()
         
-        let usernameTextField = app.textFields["Username"]
+        let usernameTextField = app.textFields["Mail"]
         usernameTextField.tap()
         usernameTextField.typeText("Test")
         

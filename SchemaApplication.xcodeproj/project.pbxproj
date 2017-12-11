@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30B0080C1FD37766000A4D46 /* SchemaApplicationRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B0080B1FD37765000A4D46 /* SchemaApplicationRequestTests.swift */; };
 		30EBDFBB1FC19A9F005763D2 /* SchemaApplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EBDFBA1FC19A9F005763D2 /* SchemaApplicationTests.swift */; };
 		30EBDFC91FC19AC2005763D2 /* SchemaApplicationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EBDFC81FC19AC2005763D2 /* SchemaApplicationUITests.swift */; };
 		B737675B1FC8221100ECAB54 /* SecretKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B737675A1FC8221100ECAB54 /* SecretKeys.plist */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		30B0080B1FD37765000A4D46 /* SchemaApplicationRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemaApplicationRequestTests.swift; sourceTree = "<group>"; };
 		30EBDFB81FC19A9F005763D2 /* SchemaApplicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchemaApplicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		30EBDFBA1FC19A9F005763D2 /* SchemaApplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemaApplicationTests.swift; sourceTree = "<group>"; };
 		30EBDFBC1FC19A9F005763D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 		30EBDFB91FC19A9F005763D2 /* SchemaApplicationTests */ = {
 			isa = PBXGroup;
 			children = (
+				30B0080B1FD37765000A4D46 /* SchemaApplicationRequestTests.swift */,
 				30EBDFBA1FC19A9F005763D2 /* SchemaApplicationTests.swift */,
 				30EBDFBC1FC19A9F005763D2 /* Info.plist */,
 			);
@@ -321,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30EBDFBB1FC19A9F005763D2 /* SchemaApplicationTests.swift in Sources */,
+				30B0080C1FD37766000A4D46 /* SchemaApplicationRequestTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
