@@ -91,7 +91,7 @@ class ChooseDepartmentViewController: UIViewController, UITableViewDataSource, U
         
         let cell = collectionview.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! DepartmentTableViewCell
         
-        var name: String? = (arrayOfDepartments[indexPath.row] as AnyObject).value(forKey: "name") as? String
+        let name: String? = (arrayOfDepartments[indexPath.row] as AnyObject).value(forKey: "name") as? String
 
         cell.departmentName.text = name
         
@@ -112,7 +112,6 @@ class ChooseDepartmentViewController: UIViewController, UITableViewDataSource, U
             collectionview.isUserInteractionEnabled = false
             
             var departmentId: Int? = (arrayOfDepartments[indexPath.row] as AnyObject).value(forKey: "id") as? Int
-          
             
             defaults.set(departmentId, forKey: "departmentId")
 

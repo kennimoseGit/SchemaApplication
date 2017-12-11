@@ -26,8 +26,8 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         self.loginButton.layer.cornerRadius = 20
         self.loginButton.clipsToBounds = true
         
-        self.usrnameTextfield.delegate = self;
-        self.passwordTextfield.delegate = self;
+        self.usrnameTextfield.delegate = self
+        self.passwordTextfield.delegate = self
         
     }
 
@@ -45,7 +45,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                 token = "dummytoken"
             }
             else {
-                token = defaults.object(forKey: "token") as! String
+                token = defaults.object(forKey: "token") as? String
             }
 
             dbConnecter.LoginwithUsernameAndPassword(token: token!, email: usrnameTextfield.text!, password: passwordTextfield.text!, completion: { (status) in

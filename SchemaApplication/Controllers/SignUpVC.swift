@@ -33,12 +33,17 @@ class SignUpVC: UIViewController {
     }
     
     @IBAction func okAction(_ sender: Any) {
-        invalidInput = false
+        var validSyntaxMail = false
         
         //Check the textfields
-        invalidInput = checkTextfield(textfield: usernameTextfield)
-        invalidInput = checkTextfield(textfield: passwordTextfield)
-        invalidInput = checkTextfield(textfield: mailTextfield)
+        let validInputUsername = checkTextfield(textfield: usernameTextfield)
+        let validInputPassword = checkTextfield(textfield: passwordTextfield)
+        let validInputMail = checkTextfield(textfield: mailTextfield)
+        
+        //Check the syntax
+        if validInputMail == true{
+            validSyntaxMail = isEmailValid(textField: mailTextfield)
+        }
         
         //Loops the textfields through and resign them all
         for textField in self.view.subviews where textField is UITextField {
@@ -46,7 +51,7 @@ class SignUpVC: UIViewController {
         }
         
         //Check if the the input is ok
-        if invalidInput == false{
+        if validInputUsername && validInputPassword && validInputMail && validSyntaxMail{
             //Create the JSON object
             studentObject.setValue(usernameTextfield.text!, forKey: "name")
             studentObject.setValue(passwordTextfield.text!, forKey: "password")
@@ -59,20 +64,49 @@ class SignUpVC: UIViewController {
             vc.studentObject = self.studentObject
             
             self.present(vc, animated: true, completion: nil)
-            
         }
     }
     
     func checkTextfield(textfield: UITextField) -> Bool{
         if textfield.text == "" || textfield.text == "This is required"{
             setRequiredField(textField: textfield)
-            return true
+            return false
         }
-        return false
+        
+        if let stringCount: String = textfield.text {
+            if stringCount.count > 20 || stringCount.count < 0{
+                setToLongOrToShortField(textField: textfield)
+                return false
+            }
+        }
+        
+        return true
     }
     
     func setRequiredField(textField: UITextField){
         textField.text = "This is required"
+        textField.textColor = UIColor.red
+    }
+    
+    func setToLongOrToShortField(textField: UITextField){
+        textField.text = "This is to short or to long"
+        textField.textColor = UIColor.red
+    }
+    
+    func isEmailValid(textField: UITextField)-> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        let result = emailTest.evaluate(with: textField.text)
+        
+        if result == false{
+            setWrongSyntaxField(textField: textField)
+        }
+        
+        return result
+    }
+    
+    func setWrongSyntaxField(textField: UITextField){
+        textField.text = "Wrong syntax"
         textField.textColor = UIColor.red
     }
     

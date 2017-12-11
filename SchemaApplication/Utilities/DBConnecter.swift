@@ -126,7 +126,7 @@ class DBConnecter: NSObject, URLSessionDelegate {
             }
             else{
                 
-                guard let data = data, let _:URLResponse = response, error == nil else {
+                guard let _ = data, let _:URLResponse = response, error == nil else {
                     print("error")
                     completion(400)
                     return
@@ -139,6 +139,7 @@ class DBConnecter: NSObject, URLSessionDelegate {
                 
             }
         }
+        
         task.resume()
         
     }
@@ -270,7 +271,7 @@ class DBConnecter: NSObject, URLSessionDelegate {
     // create a user in database
     func createUser(token:String, studentObject:NSMutableDictionary, completion: @escaping (_ status:Int, _ studentId:Int) -> Void){
         
-        var studentId:Int = 0
+        let studentId:Int = 0
         
         let url:URL = URL(string: "https://scheduleapplication.herokuapp.com/student/create")!
 
@@ -378,7 +379,7 @@ class DBConnecter: NSObject, URLSessionDelegate {
                 
             else{
                 
-                guard let data = data, let _:URLResponse = response, error == nil else {
+                guard let _ = data, let _:URLResponse = response, error == nil else {
                     print("error")
                     completion(400)
                     return

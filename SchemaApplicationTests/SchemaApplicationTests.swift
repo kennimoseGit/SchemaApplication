@@ -9,53 +9,65 @@
 import XCTest
 @testable import SchemaApplication
 
-// hey
-
+//Run all tests by pressing button on line 13
 class SchemaApplicationTests: XCTestCase {
     
     let signUpVC: SignUpVC = SignUpVC()
     let textfield: UITextField = UITextField()
     
-    override func setUp() {
-        super.setUp()
-        
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        
-    }
-    
-    override func tearDown() {
-        super.tearDown()
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        
-    }
-    
+    //Testing if the textfield have one letter
     func testUsernameTextfieldNotEmpty() {
         
-        textfield.text = "Test"
+        textfield.text = "A"
         
-        let isInputValid = signUpVC.checkTextfield(textfield: textfield)
+        let validInput = signUpVC.checkTextfield(textfield: textfield)
         
-        if isInputValid == true{
-            XCTFail()
-        }
+        XCTAssertTrue(validInput)
     }
     
+    //Testing if the textfield is empty
     func testUsernameTextfieldEmpty() {
         
         textfield.text = ""
         
-        let isInputValid = signUpVC.checkTextfield(textfield: textfield)
+        let invalidInput = signUpVC.checkTextfield(textfield: textfield)
         
-        if isInputValid == false{
-            XCTFail()
-        }
+        XCTAssertFalse(invalidInput)
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    //Testing if the textfield has 21 letters
+    func testUsernameTextfieldIs21Letters(){
+        textfield.text = "abcdefghijklmnopqerst"
+        
+        let invalidInput = signUpVC.checkTextfield(textfield: textfield)
+        
+        XCTAssertFalse(invalidInput)
     }
     
+    //Testing if the textfield has 20 letters
+    func testUsernameTextfieldIs20Letters(){
+        textfield.text = "abcdefghijklmnopqers"
+        
+        let validInput = signUpVC.checkTextfield(textfield: textfield)
+        
+        XCTAssertTrue(validInput)
+    }
+    
+    //Testing if the syntax is correct - Invalid input
+    func testMailSyntaxIsCorrectFail(){
+        textfield.text = "abcde"
+        
+        let invalidInput = signUpVC.isEmailValid(textField: textfield)
+        
+        XCTAssertFalse(invalidInput)
+    }
+    
+    //Testing if the syntax is correct - Valid input
+    func testMailSyntaxIsCorrectApprove(){
+        textfield.text = "abcde@abc.dk"
+        
+        let validInput = signUpVC.isEmailValid(textField: textfield)
+        
+        XCTAssertTrue(validInput)
+    }
 }
