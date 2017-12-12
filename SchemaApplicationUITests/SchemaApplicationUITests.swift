@@ -14,7 +14,6 @@ class SchemaApplicationUITests: XCTestCase {
     var app: XCUIApplication!
     
     // MARK: - XCTestCase
-    
     override func setUp() {
         super.setUp()
         
@@ -30,20 +29,19 @@ class SchemaApplicationUITests: XCTestCase {
         app.launch()
         
         app.buttons["Sign up"].tap()
-    }
-    
-    //Test if a user can sign in
-    func testSignInViewController(){
-        app.launch()
         
-        let usernameTextField = app.textFields["Mail"]
-        usernameTextField.tap()
-        usernameTextField.typeText("Test")
+        let nameTextField = app.textFields["Name"]
+        nameTextField.tap()
+        nameTextField.typeText("mads")
         
         let passwordTextField = app.textFields["Password"]
         passwordTextField.tap()
-        passwordTextField.typeText("Test")
+        passwordTextField.typeText("password")
         
-        app.buttons["Login"].tap()
+        let mailTextField = app.textFields["Mail"]
+        mailTextField.tap()
+        mailTextField.typeText("mads@mads.dk")
+        
+        app.buttons["Ok"].tap()
     }
 }

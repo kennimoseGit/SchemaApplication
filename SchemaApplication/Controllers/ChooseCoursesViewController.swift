@@ -109,7 +109,7 @@ class ChooseCoursesViewController: UIViewController, UITableViewDataSource, UITa
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let courseId: Int? = (arrayOfCourses[indexPath.row] as AnyObject).value(forKey: "id") as? Int
+        var courseId: Int? = (arrayOfCourses[indexPath.row] as AnyObject).value(forKey: "id") as? Int
     
         arrayOfSelectedCourses.append(courseId!)
         
